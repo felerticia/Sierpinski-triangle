@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="600" height="400" style="padding : 2px; border:1px solid #000000;"></canvas> 
+    <script>
+        const c = document.getElementById("myCanvas");
+        const width = c.width;
+        const height = c.height;
+        const ctx = c.getContext("2d");
+
+
+        ctx.fillStyle="#bbb";
+        ctx.fillRect(0,0,width,height); 
+        ctx.fillStyle="#696";
+        ctx.fillRect(0,0,width,height ); 
+
+
+        const points = [];
+        //A
+        points.push({
+            x : width/2,
+            y : height/10
+        })
+        //B
+        points.push({
+            x : width/4 - width/10,
+            y : height * 9 /10
+        })
+        //C
+        points.push({
+            x : 3*width/4 + width/10 ,
+            y : height * 9 /10
+        })
+        points.forEach ( point =>{
+            ctx.fillStyle="#900";
+            ctx.fillRect(point.x,point.y,5,5)
+        });
+
+
+        let newPoint = {
+            x : Math.floor(Math.random()*width*.9),
+            y : Math.floor(Math.random()*height*.9)
+        }
+
+        let cnt =0;
+        const interval = setInterval(()=>{
+            let index = Math.floor(Math.random()*3);
+            newPoint.x = (newPoint.x + points[index].x)/2;
+            newPoint.y = (newPoint.y + points[index].y)/2;
+            ctx.fillRect(newPoint.x,newPoint.y,5,5);
+            console.log(cnt)
+            if (++cnt > 3000)
+                clearInterval(interval)
+        }, 5);
+
+
+
+    </script>
+</body>
+</html>
